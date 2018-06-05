@@ -4,7 +4,7 @@ This mate-package contains all the packages and Ackermann steer link controllers
 
 ## Getting Started
 
-Instructions install the software.
+Instructions install the the software.
 
 ### Prerequisites
 
