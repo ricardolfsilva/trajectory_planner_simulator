@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <remap from="/gains/base_to_left_rear_wheel/parameter_descriptions" to="/gains/base_to_left_rear_wheel/parameter_descriptions_c2"/>
+  <remap from="/gains/base_to_left_rear_wheel/parameter_updates" to="/gains/base_to_left_rear_wheel/parameter_updates_c2"/>
+  <remap from="/gains/base_to_right_rear_wheel/parameter_descriptions" to="/gains/base_to_right_rear_wheel/parameter_descriptions_c2"/>
+  <remap from="/gains/base_to_right_rear_wheel/parameter_updates" to="/gains/base_to_right_rear_wheel/parameter_updates_c2"/>
+  <param name="robot_description"
+         command="$(find xacro)/xacro --inorder '$(find cirkit_unit03_gazebo)/urdf/description_c2.gazebo.xacro'" />
+  <node name="robot_state_publisher_c2" pkg="robot_state_publisher" type="robot_state_publisher" >
+  	<remap from="/joint_states" to="/cirkit_unit03_gazebo_c2/joint_states" />
+  </node>
+</launch>
