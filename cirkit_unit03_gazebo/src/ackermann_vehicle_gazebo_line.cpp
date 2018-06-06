@@ -22,10 +22,11 @@
  ***************************************************************************************************/
 
 /**
-   \file  local_path_planning.cpp
-   \brief Algorithm for subscribing to lidar data and compute the free space
-   \author Ricardo Silva
-   \date   June, 2018
+ * @file ackermann_vehicle_gazebo.cpp
+ * @brief Convertsline laser scan to point cloud
+ * @author Ricardo Silva
+ * @version v0
+ * @date 2018-06-06
  */
 
 #include <laser_geometry/laser_geometry.h>
@@ -35,6 +36,9 @@
 #include <ros/ros.h>
 #include <tf/transform_listener.h>
 
+/**
+ @brief Class to convert laser scan
+*/
 class lineFilter
 {
 public:
@@ -50,6 +54,10 @@ private:
   ros::Subscriber laserlineSub;
 };
 
+/**
+   @brief lineFilter class constructor
+   @return void
+ */
 lineFilter::lineFilter()
 {
   laserlineSub = node_.subscribe<sensor_msgs::LaserScan>("/line_laser_scan", 1000, &lineFilter::lineCallback, this);
@@ -57,6 +65,11 @@ lineFilter::lineFilter()
   tfListener.setExtrapolationLimit(ros::Duration(0.1));
 }
 
+/**
+   @brief Function to convert laser scan to point cloud
+   @param laser scan
+   @return void
+ */
 void lineFilter::lineCallback(const sensor_msgs::LaserScan::ConstPtr& line)
 {
   sensor_msgs::PointCloud2 cloud;
@@ -71,6 +84,12 @@ void lineFilter::lineCallback(const sensor_msgs::LaserScan::ConstPtr& line)
   }
 }
 
+/**
+   @brief Main function to conversion
+   @param argc
+   @param argv
+   @return int
+ */
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "cirkit_unit03_gazebo_line_node");
